@@ -297,6 +297,16 @@ footer a:hover {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
+.btn-as-title {
+    all: unset; /* Resets all default button styles */
+    cursor: pointer; /* Ensures it still behaves like a button */
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Brush Script MT', cursive;
+    margin-bottom: 0.5rem;
+    color: inherit; /* Inherits the text color from the parent */
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     nav ul {

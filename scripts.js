@@ -2,9 +2,23 @@
 let cart = [];
         
 function addToCart(name, price) {
-    cart.push({name, price});
+    cart.push({ name, price });
+    localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${name} added to cart!`);
-    console.log(cart);
+    
+    setTimeout(() => {
+        window.location.href = 'checkout.html';
+    }, 100);
+}
+
+function goHome() {
+    window.location.href = 'index.html';
+}
+
+
+// Load cart from localStorage on page load
+if (localStorage.getItem('cart')) {
+    cart = JSON.parse(localStorage.getItem('cart'));
 }
 
 // Custom pizza builder
@@ -109,3 +123,72 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+// Simple script to toggle the delivery option selection
+document.querySelectorAll('.delivery-option').forEach(option => {
+    option.addEventListener('click', function() {
+        document.querySelectorAll('.delivery-option').forEach(el => {
+            el.classList.remove('selected');
+        });
+        this.classList.add('selected');
+    });
+});
+
+// Checkout page functionality
+function renderCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const subtotalEl = document.getElementById('subtotal');
+    const taxEl = document.getElementById('tax');
+    const deliveryFeeEl = document.getElementById('delivery-fee');
+    const totalEl = document.getElementById('total');
+
+    cartItemsContainer.innerHTML = '';
+
+    let subtotal = 0;
+
+    // Add each item to the page
+    cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('order-item');
+        
+        const nameDiv = document.createElement('div');
+        nameDiv.textContent = item.name;
+        
+        const priceDiv = document.createElement('div');
+        priceDiv.textContent = `$${item.price.toFixed(2)}`;
+
+        itemDiv.appendChild(nameDiv);
+        itemDiv.appendChild(priceDiv);
+
+        cartItemsContainer.appendChild(itemDiv);
+
+        subtotal += item.price;
+    });
+
+    // Calculate tax (let's assume 10% sales tax)
+    const tax = subtotal * 0.10;
+    // Delivery fee (fixed from your HTML)
+    const deliveryFee = 3.99;
+
+    // Calculate total
+    const total = subtotal + tax + deliveryFee;
+
+    // Update the page
+    subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    taxEl.textContent = `$${tax.toFixed(2)}`;
+    deliveryFeeEl.textContent = `$${deliveryFee.toFixed(2)}`; // Always $3.99
+    totalEl.textContent = `$${total.toFixed(2)}`;
+}
+
+// When page loads, render the cart
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.includes('checkout.html')) {
+        renderCart();
+    }
+});
+
+
+// Call renderCart when the checkout page loads
+if (window.location.pathname.includes('checkout.html')) {
+    renderCart();
+}
