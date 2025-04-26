@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slice Haven - Pizza Perfection</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="map-styles.css">
     <script src="scripts.js"></script>
+    <script src="map.js"></script>
 </head>
 <body>
     <header>
@@ -224,6 +226,36 @@
                 <div class="testimonial">
                     <p>"As an Italian, I'm very picky about my pizza. I was skeptical at first, but Papa Juans truly delivers authentic flavors that remind me of home."</p>
                     <div class="testimonial-author">- Isabella M.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2020, Papa Juans began with a simple mission: to create delicious, authentic pizza that brings people together. Our chefs trained in Naples, Italy, to master the art of traditional pizza making before bringing those techniques home.</p>
+                    <p>We believe in using only the freshest ingredients, sourced locally whenever possible. Our dough is made fresh daily, and our signature sauce is a closely guarded family recipe that's been passed down through generations.</p>
+                    <p>At Papa Juans, we're more than just a pizza place - we're a community hub where families, friends, and neighbors can gather to enjoy great food in a warm, welcoming atmosphere.</p>
+                </div>
+            </div>
+            <h3 class="locations-heading">Our Locations</h3>
+            <p class="locations-intro">Find your nearest Papa Juans location. We're constantly expanding to serve more communities with our authentic pizza experience.</p>
+           
+            <div class="store-finder">
+                <div class="search-panel">
+                    <h3>Find a Location</h3>
+                    <input type="text" id="address-input" class="search-input" placeholder="Enter your address or zip code">
+                    <button id="search-button" class="search-button">Find Nearest Location</button>
+                   
+                    <div class="location-list" id="location-list">
+                        <!-- Location items will be dynamically added here -->
+                    </div>
+                </div>
+               
+                <div class="map-container">
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
