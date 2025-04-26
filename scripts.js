@@ -189,3 +189,161 @@ function clearCart() {
     renderCart();
     alert('Cart cleared!');
 }
+
+function editOrder() {
+    setTimeout(() => {
+        window.location.href = 'orderList.html';
+    }, 100);
+}
+
+
+
+
+
+// orderList.html functions
+
+function createCartItemElement(item, index) {
+    return `
+        <div class="cart-item" data-index="${index}">
+            <div class="item-image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <line x1="21.17" y1="8" x2="12" y2="8"/>
+                    <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
+                    <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
+                </svg>
+            </div>
+            <div class="item-details">
+                <div class="item-name">${item.name}</div>
+                <div class="item-desc">${item.size || ''} ${item.description || ''}</div>
+            </div>
+            <div class="item-controls">
+                <button class="remove-btn" onclick="removeItem(${index})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="item-price">$${item.price.toFixed(2)}</div>
+        </div>
+    `;
+}
+
+
+// Load cart from localStorage
+function loadCart() {
+    let cart;
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error('Error loading cart from localStorage:', e);
+        cart = [];
+    }
+    return cart;
+}
+
+// Save cart to localStorage
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Update cart display
+function updateCartDisplay() {
+    const cart = loadCart();
+    const cartContainer = document.getElementById('cart-items-container');
+    const emptyCartMessage = document.getElementById('empty-cart-message');
+    const cartSummary = document.getElementById('cart-summary');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    // Check if cartContainer exists
+    if (!cartContainer) {
+        console.error('Cart container element not found in the DOM.');
+        return;
+    }
+
+    // Clear existing content
+    cartContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        // Show empty cart message
+        emptyCartMessage.style.display = 'block';
+        cartSummary.style.display = 'none';
+        return;
+    }
+
+    // Hide empty cart message and show summary
+    emptyCartMessage.style.display = 'none';
+    cartSummary.style.display = 'block';
+
+    // Add cart items
+    cart.forEach((item, index) => {
+        const itemElement = createCartItemElement(item, index);
+        cartContainer.innerHTML += itemElement;
+    });
+
+    // Update summary
+    updateSummary();
+}
+
+// Remove item from cart (no quantity logic)
+function removeItem(index) {
+    const cart = loadCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    updateCartDisplay();
+}
+
+
+// Update summary calculations (no quantity)
+function updateSummary() {
+    const cart = loadCart();
+    const subtotal = cart.reduce((total, item) => total + item.price, 0);
+    const taxRate = 0.09; // 9% tax
+    const tax = subtotal * taxRate;
+    const deliveryFee = 3.99;
+    const total = subtotal + tax + deliveryFee;
+
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+}
+
+
+// Initialize mock data for testing if cart is empty
+function initializeMockData() {
+    const existingCart = loadCart();
+    
+    // Only add mock data if cart is empty and we're in a development environment
+    if (existingCart.length === 0 && window.location.hostname === 'localhost') {
+        const mockCart = [
+            {
+                name: "Pepperoni Pizza",
+                description: "With extra cheese",
+                size: "Large",
+                quantity: 1,
+                price: 18.99
+            },
+            {
+                name: "Garlic Bread",
+                description: "With cheese",
+                quantity: 1,
+                price: 4.99
+            },
+            {
+                name: "Soft Drink",
+                description: "Cola",
+                quantity: 2,
+                price: 2.99
+            }
+        ];
+        saveCart(mockCart);
+    }
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Uncomment this line to add test data when developing locally
+    // initializeMockData();
+    updateCartDisplay();
+});
