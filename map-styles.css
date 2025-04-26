@@ -1,0 +1,246 @@
+/* About Section Styles */
+.about-section {
+    background-color: #f8f4e5;
+    padding: 3rem 1rem;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.locations-heading {
+    color: #d62828;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.locations-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Store Locator Layout */
+.store-finder {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .store-finder {
+        flex-direction: row;
+    }
+}
+
+/* Location Container Layout */
+#location-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+#location-list-container {
+    flex: 1;
+    max-width: 350px;
+}
+
+#map-container {
+    flex: 2;
+}
+
+/* Search Panel Styles */
+.search-panel, .search-box {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .search-panel {
+        width: 300px;
+    }
+}
+
+.search-panel h3 {
+    color: #d62828;
+    margin-bottom: 1rem;
+}
+
+/* Search Input Styles */
+.search-input, .search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 8px;
+}
+
+/* Search Button Styles */
+.search-button, .search-box button {
+    background-color: #d62828;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.search-button {
+    width: 100%;
+    padding: 0.75rem;
+}
+
+.search-button:hover, .search-box button:hover {
+    background-color: #9e0000;
+}
+
+.search-box button {
+    padding: 8px 15px;
+    background-color: #007bff;
+}
+
+.search-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Location List Styles */
+#location-list, .location-list {
+    margin-top: 1.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.location-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.location-item:hover {
+    background-color: #f5f5f5;
+}
+
+.location-name {
+    font-weight: bold;
+    color: #d62828;
+    margin-bottom: 5px;
+}
+
+.location-address, .location-phone, .location-distance {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.location-distance {
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* Map Container Styles */
+.map-container, #map {
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.map-container {
+    flex-grow: 1;
+}
+
+#map {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Info Window Styles */
+.info-window {
+    max-width: 300px;
+    padding: 0;
+}
+
+.info-window h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #d62828;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.info-window div {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Store Hours Styles */
+.store-hours {
+    margin-top: 1rem;
+}
+
+.hours-table {
+    margin-top: 8px;
+    font-size: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.hours-table td {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.hours-table td:first-child {
+    padding-right: 10px;
+    font-weight: 500;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#loading-message {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
