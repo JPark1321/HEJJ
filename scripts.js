@@ -1,6 +1,11 @@
 // Cart functionality
 let cart = [];
-        
+
+// Load cart from localStorage on page load
+if (localStorage.getItem('cart')) {
+    cart = JSON.parse(localStorage.getItem('cart'));
+}
+
 function addToCart(name, price) {
     cart.push({ name, price });
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -12,13 +17,9 @@ function addToCart(name, price) {
 }
 
 function goHome() {
-    window.location.href = 'index.html';
-}
-
-
-// Load cart from localStorage on page load
-if (localStorage.getItem('cart')) {
-    cart = JSON.parse(localStorage.getItem('cart'));
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 100);
 }
 
 // Custom pizza builder
@@ -34,44 +35,50 @@ const addCustomPizzaBtn = document.getElementById('add-custom-pizza');
 
 // Update pizza summary and price
 function updatePizzaSummary() {
-    let size = document.querySelector('input[name="size"]:checked').value;
-    let crust = document.querySelector('input[name="crust"]:checked').value;
-    let sauce = document.querySelector('input[name="sauce"]:checked').value;
-    let cheese = document.querySelector('input[name="cheese"]:checked').value;
+    const sizeElement = document.querySelector('input[name="size"]:checked');
+    const crustElement = document.querySelector('input[name="crust"]:checked');
+    const sauceElement = document.querySelector('input[name="sauce"]:checked');
+    const cheeseElement = document.querySelector('input[name="cheese"]:checked');
     
-    let basePrice = parseFloat(document.querySelector('input[name="size"]:checked').dataset.price);
+    if (!sizeElement || !crustElement || !sauceElement || !cheeseElement) {
+        return;
+    }
+
+    let size = sizeElement.value;
+    let crust = crustElement.value;
+    let sauce = sauceElement.value;
+    let cheese = cheeseElement.value;
     
-    // Add cheese price modifier if any
-    let cheeseElement = document.querySelector('input[name="cheese"]:checked');
-    if(cheeseElement.dataset.price) {
+    let basePrice = parseFloat(sizeElement.dataset.price) || 0;
+
+    if (cheeseElement.dataset.price) {
         basePrice += parseFloat(cheeseElement.dataset.price);
     }
     
-    // Calculate toppings
     let selectedToppings = [];
     let toppingPrice = 0;
     
     toppingInputs.forEach(input => {
-        if(input.checked) {
+        if (input.checked) {
             selectedToppings.push(input.value);
-            toppingPrice += parseFloat(input.dataset.price);
+            toppingPrice += parseFloat(input.dataset.price) || 0;
         }
     });
-    
-    // Update summary text
-    let summaryHTML = `<p>${size} ${crust} Crust Pizza with ${sauce} Sauce and ${cheese} Cheese</p>`;
-    
-    if(selectedToppings.length > 0) {
-        summaryHTML += `<p>Toppings: ${selectedToppings.join(', ')}</p>`;
-    } else {
-        summaryHTML += `<p>Toppings: None</p>`;
+
+    if (pizzaSummary && pizzaPrice) {
+        let summaryHTML = `<p>${size} ${crust} Crust Pizza with ${sauce} Sauce and ${cheese} Cheese</p>`;
+        
+        if (selectedToppings.length > 0) {
+            summaryHTML += `<p>Toppings: ${selectedToppings.join(', ')}</p>`;
+        } else {
+            summaryHTML += `<p>Toppings: None</p>`;
+        }
+        
+        pizzaSummary.innerHTML = summaryHTML;
+
+        let totalPrice = basePrice + toppingPrice;
+        pizzaPrice.textContent = `$${totalPrice.toFixed(2)}`;
     }
-    
-    pizzaSummary.innerHTML = summaryHTML;
-    
-    // Update price
-    let totalPrice = basePrice + toppingPrice;
-    pizzaPrice.textContent = `$${totalPrice.toFixed(2)}`;
     
     return {
         size,
@@ -79,48 +86,40 @@ function updatePizzaSummary() {
         sauce,
         cheese,
         toppings: selectedToppings,
-        price: totalPrice
+        price: basePrice + toppingPrice
     };
 }
 
-// Add event listeners to all inputs
-sizeInputs.forEach(input => {
-    input.addEventListener('change', updatePizzaSummary);
-});
-
-crustInputs.forEach(input => {
-    input.addEventListener('change', updatePizzaSummary);
-});
-
-sauceInputs.forEach(input => {
-    input.addEventListener('change', updatePizzaSummary);
-});
-
-cheeseInputs.forEach(input => {
-    input.addEventListener('change', updatePizzaSummary);
-});
-
-toppingInputs.forEach(input => {
+// Add event listeners to pizza builder inputs
+[...sizeInputs, ...crustInputs, ...sauceInputs, ...cheeseInputs, ...toppingInputs].forEach(input => {
     input.addEventListener('change', updatePizzaSummary);
 });
 
 // Add custom pizza to cart
-addCustomPizzaBtn.addEventListener('click', () => {
-    const customPizza = updatePizzaSummary();
-    addToCart(`Custom ${customPizza.size} Pizza`, customPizza.price);
-});
+if (addCustomPizzaBtn) {
+    addCustomPizzaBtn.addEventListener('click', () => {
+        const customPizza = updatePizzaSummary();
+        if (customPizza) {
+            addToCart(`Custom ${customPizza.size} Pizza`, customPizza.price);
+        }
+    });
+}
 
-// Initialize summary
-updatePizzaSummary();
+// Initialize summary if possible
+if (pizzaSummary && pizzaPrice) {
+    updatePizzaSummary();
+}
 
 // Smooth scrolling for navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
@@ -142,11 +141,13 @@ function renderCart() {
     const deliveryFeeEl = document.getElementById('delivery-fee');
     const totalEl = document.getElementById('total');
 
-    cartItemsContainer.innerHTML = '';
+    if (!cartItemsContainer || !subtotalEl || !taxEl || !deliveryFeeEl || !totalEl) {
+        return;
+    }
 
+    cartItemsContainer.innerHTML = '';
     let subtotal = 0;
 
-    // Add each item to the page
     cart.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('order-item');
@@ -165,30 +166,26 @@ function renderCart() {
         subtotal += item.price;
     });
 
-    // Calculate tax (let's assume 10% sales tax)
     const tax = subtotal * 0.10;
-    // Delivery fee (fixed from your HTML)
     const deliveryFee = 3.99;
-
-    // Calculate total
     const total = subtotal + tax + deliveryFee;
 
-    // Update the page
     subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
     taxEl.textContent = `$${tax.toFixed(2)}`;
-    deliveryFeeEl.textContent = `$${deliveryFee.toFixed(2)}`; // Always $3.99
+    deliveryFeeEl.textContent = `$${deliveryFee.toFixed(2)}`;
     totalEl.textContent = `$${total.toFixed(2)}`;
 }
 
-// When page loads, render the cart
+// Render cart only when the DOM is ready and on checkout page
 document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.includes('checkout.html')) {
         renderCart();
     }
 });
 
-
-// Call renderCart when the checkout page loads
-if (window.location.pathname.includes('checkout.html')) {
+function clearCart() {
+    cart = [];
+    localStorage.removeItem('cart');
     renderCart();
+    alert('Cart cleared!');
 }
