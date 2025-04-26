@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice Haven - Pizza Perfection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Slice Haven</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#customize">Build Your Pizza</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <h1>Artisanal Pizza Delivered</h1>
+        <p>Hand-crafted with fresh ingredients and baked to perfection in our wood-fired ovens</p>
+        <a href="#menu" class="btn">View Our Menu</a>
+    </section>
+    
+    <section id="menu" class="container">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="Margherita Pizza">
+                <div class="menu-item-content">
+                    <h3>Margherita</h3>
+                    <p>Classic tomato sauce, fresh mozzarella, basil, and extra virgin olive oil</p>
+                    <div class="price">$12.99</div>
+                    <button class="btn" onclick="addToCart('Margherita', 12.99)">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="Pepperoni Pizza">
+                <div class="menu-item-content">
+                    <h3>Pepperoni</h3>
+                    <p>Tomato sauce, mozzarella, and generous layers of pepperoni</p>
+                    <div class="price">$14.99</div>
+                    <button class="btn" onclick="addToCart('Pepperoni', 14.99)">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="Vegetarian Pizza">
+                <div class="menu-item-content">
+                    <h3>Vegetarian</h3>
+                    <p>Tomato sauce, mozzarella, bell peppers, mushrooms, onions, and olives</p>
+                    <div class="price">$15.99</div>
+                    <button class="btn" onclick="addToCart('Vegetarian', 15.99)">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="BBQ Chicken Pizza">
+                <div class="menu-item-content">
+                    <h3>BBQ Chicken</h3>
+                    <p>BBQ sauce, mozzarella, grilled chicken, red onions, and cilantro</p>
+                    <div class="price">$16.99</div>
+                    <button class="btn" onclick="addToCart('BBQ Chicken', 16.99)">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="Supreme Pizza">
+                <div class="menu-item-content">
+                    <h3>Supreme</h3>
+                    <p>Tomato sauce, mozzarella, pepperoni, sausage, bell peppers, onions, and olives</p>
+                    <div class="price">$18.99</div>
+                    <button class="btn" onclick="addToCart('Supreme', 18.99)">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <img src="/api/placeholder/300/200" alt="Hawaiian Pizza">
+                <div class="menu-item-content">
+                    <h3>Hawaiian</h3>
+                    <p>Tomato sauce, mozzarella, ham, and pineapple</p>
+                    <div class="price">$15.99</div>
+                    <button class="btn" onclick="addToCart('Hawaiian', 15.99)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="customize">
+        <div class="container">
+            <h2>Build Your Own Pizza</h2>
+            <div class="customize-container">
+                <div class="customize-options">
+                    <div class="customize-section">
+                        <h3>Size</h3>
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <input type="radio" name="size" id="size-small" value="Small" data-price="10.99" checked>
+                                <label for="size-small">Small ($10.99)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="size" id="size-medium" value="Medium" data-price="13.99">
+                                <label for="size-medium">Medium ($13.99)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="size" id="size-large" value="Large" data-price="16.99">
+                                <label for="size-large">Large ($16.99)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customize-section">
+                        <h3>Crust</h3>
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <input type="radio" name="crust" id="crust-thin" value="Thin" checked>
+                                <label for="crust-thin">Thin</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="crust" id="crust-regular" value="Regular">
+                                <label for="crust-regular">Regular</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="crust" id="crust-deep" value="Deep Dish">
+                                <label for="crust-deep">Deep Dish</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customize-section">
+                        <h3>Sauce</h3>
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <input type="radio" name="sauce" id="sauce-tomato" value="Tomato" checked>
+                                <label for="sauce-tomato">Tomato</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="sauce" id="sauce-white" value="White">
+                                <label for="sauce-white">White</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="sauce" id="sauce-bbq" value="BBQ">
+                                <label for="sauce-bbq">BBQ</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customize-section">
+                        <h3>Cheese</h3>
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <input type="radio" name="cheese" id="cheese-regular" value="Regular" checked>
+                                <label for="cheese-regular">Regular</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="cheese" id="cheese-extra" value="Extra" data-price="1.50">
+                                <label for="cheese-extra">Extra (+$1.50)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="cheese" id="cheese-none" value="None" data-price="-1.00">
+                                <label for="cheese-none">None (-$1.00)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customize-section">
+                        <h3>Toppings ($1.25 each)</h3>
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-pepperoni" value="Pepperoni" data-price="1.25">
+                                <label for="topping-pepperoni">Pepperoni</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-mushrooms" value="Mushrooms" data-price="1.25">
+                                <label for="topping-mushrooms">Mushrooms</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-sausage" value="Sausage" data-price="1.25">
+                                <label for="topping-sausage">Sausage</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-onions" value="Onions" data-price="1.25">
+                                <label for="topping-onions">Onions</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-bellpeppers" value="Bell Peppers" data-price="1.25">
+                                <label for="topping-bellpeppers">Bell Peppers</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-olives" value="Olives" data-price="1.25">
+                                <label for="topping-olives">Olives</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-bacon" value="Bacon" data-price="1.25">
+                                <label for="topping-bacon">Bacon</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="toppings" id="topping-chicken" value="Chicken" data-price="1.25">
+                                <label for="topping-chicken">Chicken</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary">
+                    <h3>Your Custom Pizza</h3>
+                    <div id="pizza-summary">
+                        <p>Small Thin Crust Pizza with Tomato Sauce and Regular Cheese</p>
+                        <p>Toppings: None</p>
+                    </div>
+                    <div class="total-price">
+                        Total: <span id="pizza-price">$10.99</span>
+                    </div>
+                </div>
+                
+                <button class="btn" id="add-custom-pizza">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"The best pizza I've ever had! The crust is perfect and the toppings are always fresh. I keep coming back for more!"</p>
+                    <div class="testimonial-author">- Sarah T.</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"Slice Haven has become our Friday night tradition. My kids love building their own pizzas and the delivery is always fast!"</p>
+                    <div class="testimonial-author">- Mark R.</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"As an Italian, I'm very picky about my pizza. I was skeptical at first, but Slice Haven truly delivers authentic flavors that remind me of home."</p>
+                    <div class="testimonial-author">- Isabella M.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <h3>Slice Haven</h3>
+                <p>123 Pizza Lane<br>Flavor Town, FT 12345</p>
+                <p>Phone: (555) 123-4567</p>
+                <p>Email: info@slicehaven.com</p>
+            </div>
+            
+            <div>
+                <h3>Hours</h3>
+                <p>Monday - Thursday: 11am - 10pm</p>
+                <p>Friday - Saturday: 11am - 12am</p>
+                <p>Sunday: 12pm - 9pm</p>
+            </div>
+            
+            <div>
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#customize">Custom Pizza</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Yelp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Slice Haven Pizza. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
