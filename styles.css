@@ -319,6 +319,10 @@ footer a:hover {
     padding-top: 20px;
 }
 
+.place-order{
+    margin-top: 20px;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     nav ul {
