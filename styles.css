@@ -51,7 +51,7 @@ nav a:hover {
 
 /* Hero section */
 .hero {
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/800');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/header.webp');
     background-size: cover;
     background-position: center;
     height: 400px;

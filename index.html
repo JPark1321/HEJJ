@@ -20,13 +20,11 @@
             </ul>
         </nav>
     </header>
-    
     <section id="home" class="hero">
         <h1>Artisanal Pizza Delivered</h1>
         <p>Hand-crafted with fresh ingredients and baked to perfection in our wood-fired ovens</p>
         <a href="#menu" class="btn">View Our Menu</a>
     </section>
-    
     <section id="menu" class="container">
         <h2>Our Menu</h2>
         <div class="menu-grid">
@@ -39,7 +37,6 @@
                     <button class="btn" onclick="addToCart('Margherita', 12.99)">Add to Cart</button>
                 </div>
             </div>
-            
             <div class="menu-item">
                 <img src="images/pepperoni.jpg" alt="Pepperoni Pizza">
                 <div class="menu-item-content">
@@ -49,7 +46,6 @@
                     <button class="btn" onclick="addToCart('Pepperoni', 14.99)">Add to Cart</button>
                 </div>
             </div>
-            
             <div class="menu-item">
                 <img src="images/vegetarian.jpg" alt="Vegetarian Pizza">
                 <div class="menu-item-content">
@@ -59,7 +55,6 @@
                     <button class="btn" onclick="addToCart('Vegetarian', 15.99)">Add to Cart</button>
                 </div>
             </div>
-            
             <div class="menu-item">
                 <img src="images/bbqchicken.jpg" alt="BBQ Chicken Pizza">
                 <div class="menu-item-content">
@@ -69,7 +64,6 @@
                     <button class="btn" onclick="addToCart('BBQ Chicken', 16.99)">Add to Cart</button>
                 </div>
             </div>
-            
             <div class="menu-item">
                 <img src="images/supreme.jpg" alt="Supreme Pizza">
                 <div class="menu-item-content">
@@ -79,7 +73,6 @@
                     <button class="btn" onclick="addToCart('Supreme', 18.99)">Add to Cart</button>
                 </div>
             </div>
-            
             <div class="menu-item">
                 <img src="images/hawaiian.jpg" alt="Hawaiian Pizza">
                 <div class="menu-item-content">
@@ -91,7 +84,6 @@
             </div>
         </div>
     </section>
-    
     <section id="customize">
         <div class="container">
             <h2>Build Your Own Pizza</h2>
@@ -102,19 +94,18 @@
                         <div class="options-grid">
                             <div class="option-item">
                                 <input type="radio" name="size" id="size-small" value="Small" data-price="10.99" checked>
-                                <label for="size-small">Small ($10.99)</label>
+                                <label for="size-small">Small</label>
                             </div>
                             <div class="option-item">
                                 <input type="radio" name="size" id="size-medium" value="Medium" data-price="13.99">
-                                <label for="size-medium">Medium ($13.99)</label>
+                                <label for="size-medium">Medium</label>
                             </div>
                             <div class="option-item">
                                 <input type="radio" name="size" id="size-large" value="Large" data-price="16.99">
-                                <label for="size-large">Large ($16.99)</label>
+                                <label for="size-large">Large</label>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="customize-section">
                         <h3>Crust</h3>
                         <div class="options-grid">
@@ -132,7 +123,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="customize-section">
                         <h3>Sauce</h3>
                         <div class="options-grid">
@@ -150,7 +140,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="customize-section">
                         <h3>Cheese</h3>
                         <div class="options-grid">
@@ -160,17 +149,16 @@
                             </div>
                             <div class="option-item">
                                 <input type="radio" name="cheese" id="cheese-extra" value="Extra" data-price="1.50">
-                                <label for="cheese-extra">Extra (+$1.50)</label>
+                                <label for="cheese-extra">Extra</label>
                             </div>
                             <div class="option-item">
                                 <input type="radio" name="cheese" id="cheese-none" value="None" data-price="-1.00">
-                                <label for="cheese-none">None (-$1.00)</label>
+                                <label for="cheese-none">None</label>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="customize-section">
-                        <h3>Toppings ($1.25 each)</h3>
+                        <h3>Toppings</h3>
                         <div class="options-grid">
                             <div class="option-item">
                                 <input type="checkbox" name="toppings" id="topping-pepperoni" value="Pepperoni" data-price="1.25">
@@ -207,7 +195,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="summary">
                     <h3>Your Custom Pizza</h3>
                     <div id="pizza-summary">
@@ -215,37 +202,32 @@
                         <p>Toppings: None</p>
                     </div>
                     <div class="total-price">
-                        Total: <span id="pizza-price">$10.99</span>
+                        Total: <span id="pizza-price">$19.99</span>
                     </div>
                 </div>
-                
-                <button class="btn" id="add-custom-pizza" onclick="addToCart( 'custom', 100 )">Add to Cart</button>
+                <button class="btn" id="add-custom-pizza" onclick="addToCart( 'Custom', 19.99 )">Add to Cart</button>
             </div>
         </div>
     </section>
-    
     <section class="testimonials">
         <div class="container">
             <h2>What Our Customers Say</h2>
             <div class="testimonial-grid">
                 <div class="testimonial">
-                    <p>"The best pizza I've ever had! The crust is perfect and the toppings are always fresh. I keep coming back for more!"</p>
+                    <p>"The best pizza I've ever had! The crust is perfect and the toppings are always fresh. I keep coming back for more! Absolutely lifesaving!"</p>
                     <div class="testimonial-author">- Sarah T.</div>
                 </div>
-                
                 <div class="testimonial">
-                    <p>"Slice Haven has become our Friday night tradition. My kids love building their own pizzas and the delivery is always fast!"</p>
-                    <div class="testimonial-author">- Mark R.</div>
+                    <p>"Papa Juans has become our Friday night tradition. My kids love building their own pizzas and the delivery is always fast! Gets me out of sticky situations!"</p>
+                    <div class="testimonial-author">- Mia R.</div>
                 </div>
-                
                 <div class="testimonial">
-                    <p>"As an Italian, I'm very picky about my pizza. I was skeptical at first, but Slice Haven truly delivers authentic flavors that remind me of home."</p>
+                    <p>"As an Italian, I'm very picky about my pizza. I was skeptical at first, but Papa Juans truly delivers authentic flavors that remind me of home."</p>
                     <div class="testimonial-author">- Isabella M.</div>
                 </div>
             </div>
         </div>
     </section>
-    
     <footer id="contact">
         <div class="footer-grid">
             <div>
@@ -254,14 +236,12 @@
                 <p>Phone: (206) 123-4567</p>
                 <p>Email: info@papajuans.com</p>
             </div>
-            
             <div>
                 <h3>Hours</h3>
                 <p>Monday - Thursday: 11am - 10pm</p>
                 <p>Friday - Saturday: 11am - 12am</p>
                 <p>Sunday: 12pm - 9pm</p>
             </div>
-            
             <div>
                 <h3>Links</h3>
                 <ul>
@@ -271,7 +251,6 @@
                     <li><a href="#">Careers</a></li>
                 </ul>
             </div>
-            
             <div>
                 <h3>Follow Us</h3>
                 <ul>
@@ -282,7 +261,6 @@
                 </ul>
             </div>
         </div>
-        
         <div class="copyright">
             <p>&copy; 2025 Papa Juans. All rights reserved.</p>
         </div>
