@@ -218,7 +218,7 @@ section h2::after {
 .total-price {
     font-size: 1.5rem;
     font-weight: bold;
-    text-align: right;
+    text-align: left;
     color: #d62828;
     margin-bottom: 1rem;
 }
@@ -305,6 +305,18 @@ footer a:hover {
     font-family: 'Brush Script MT', cursive;
     margin-bottom: 0.5rem;
     color: inherit; /* Inherits the text color from the parent */
+}
+
+.order-summary {
+    padding-top: 20px;
+}
+
+.payment-details {
+    padding-top: 20px;
+}
+
+.payment-information {
+    padding-top: 20px;
 }
 
 /* Responsive styles */

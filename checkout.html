@@ -64,30 +64,15 @@
                 <div class="form-group">
                     <input type="text" id="address2" placeholder="Apt, suite, floor (optional)">
                 </div>
-                
+
                 <div class="form-group">
-                    <div class="delivery-options">
-                        <div class="delivery-option selected">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <h4>Standard</h4>
-                            <p>30-45 min</p>
-                        </div>
-                        <div class="delivery-option">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                            </svg>
-                            <h4>Express</h4>
-                            <p>15-20 min</p>
-                            <p>+$2.99</p>
-                        </div>
-                    </div>
+                    <label for="additional-requests">Additional Requests</label>
+                    <input type="text" id="additional-requests" placeholder="Additional requests">
                 </div>
                 
+
+            <div class="payment-information">
                 <h2>Payment Information</h2>
-                
                 <div class="form-group">
                     <label for="card-name">Name on Card</label>
                     <input type="text" id="card-name" placeholder="Enter name as shown on card">
@@ -116,6 +101,7 @@
                     </svg>
                     Secure Payment
                 </div>
+            </div>    
                 
                 <button class="btn">Place Order</button>
             </div>
