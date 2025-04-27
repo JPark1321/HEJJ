@@ -1,2 +1,2 @@
 # HEJJ
-ez hackathon win
+Chanbal Innovation Hack
