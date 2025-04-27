@@ -22,6 +22,12 @@ function goHome() {
     }, 100);
 }
 
+function goToCheckout() {
+    setTimeout(() => {
+        window.location.href = 'checkout.html';
+    }, 100);
+}
+
 // Custom pizza builder
 const sizeInputs = document.querySelectorAll('input[name="size"]');
 const crustInputs = document.querySelectorAll('input[name="crust"]');
@@ -135,11 +141,11 @@ document.querySelectorAll('.delivery-option').forEach(option => {
 
 // Checkout page functionality
 function renderCart() {
-    const cartItemsContainer = document.getElementById('cart-items');
+    const cartItemsContainer = document.getElementById('cart-items-container');
     const subtotalEl = document.getElementById('subtotal');
     const taxEl = document.getElementById('tax');
     const deliveryFeeEl = document.getElementById('delivery-fee');
-    const totalEl = document.getElementById('total');
+    const totalEl = document.getElementById('total-price');
 
     if (!cartItemsContainer || !subtotalEl || !taxEl || !deliveryFeeEl || !totalEl) {
         return;
@@ -200,99 +206,99 @@ function editOrder() {
 
 
 
+
+
+
 // orderList.html functions
 
-function createCartItemElement(item, index) {
+// Cart functions
+function loadCart() {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function createCartItemElement(item, index, allowRemove = false) {
     return `
-        <div class="cart-item" data-index="${index}">
-            <div class="item-image">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <line x1="21.17" y1="8" x2="12" y2="8"/>
-                    <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
-                    <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
-                </svg>
-            </div>
+        <div class="cart-item">
             <div class="item-details">
                 <div class="item-name">${item.name}</div>
-                <div class="item-desc">${item.size || ''} ${item.description || ''}</div>
+                ${item.size ? `<div class="item-size">${item.size}</div>` : ''}
             </div>
+            <div class="item-price">$${item.price.toFixed(2)}</div>
+            ${allowRemove ? `
             <div class="item-controls">
                 <button class="remove-btn" onclick="removeItem(${index})">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                 </button>
-            </div>
-            <div class="item-price">$${item.price.toFixed(2)}</div>
+            </div>` : ''}
         </div>
     `;
 }
 
+function renderCheckoutCart() {
+    const cart = loadCart();
+    const container = document.getElementById('cart-items-container');
+    const emptyMessage = document.getElementById('empty-cart-message');
+    const summarySection = document.getElementById('cart-summary');
 
-// Load cart from localStorage
-function loadCart() {
-    let cart;
-    try {
-        cart = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (e) {
-        console.error('Error loading cart from localStorage:', e);
-        cart = [];
+    if (cart.length === 0) {
+        if (emptyMessage) emptyMessage.style.display = 'block';
+        if (summarySection) summarySection.style.display = 'none';
+        if (container) container.innerHTML = '';
+        return;
     }
-    return cart;
+
+    if (emptyMessage) emptyMessage.style.display = 'none';
+    if (summarySection) summarySection.style.display = 'block';
+
+    // Render cart items without remove buttons
+    if (container) {
+        container.innerHTML = cart.map((item, index) => 
+            createCartItemElement(item, index, false)
+        ).join('');
+    }
+
+    // Calculate totals
+    const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+    const tax = subtotal * 0.10;
+    const deliveryFee = 3.99;
+    const total = subtotal + tax + deliveryFee;
+
+    // Update totals display
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
 }
 
-// Save cart to localStorage
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+
+// Remove item from cart
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartDisplay();
+    }
 }
 
 // Update cart display
 function updateCartDisplay() {
-    const cart = loadCart();
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartContainer = document.getElementById('cart-items-container');
-    const emptyCartMessage = document.getElementById('empty-cart-message');
-    const cartSummary = document.getElementById('cart-summary');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    // Check if cartContainer exists
-    if (!cartContainer) {
-        console.error('Cart container element not found in the DOM.');
-        return;
+    
+    if (cartContainer) {
+        cartContainer.innerHTML = cart.map((item, index) => 
+            createCartItemElement(item, index, true) // true enables remove button
+        ).join('');
+        updateSummary();
     }
-
-    // Clear existing content
-    cartContainer.innerHTML = '';
-
-    if (cart.length === 0) {
-        // Show empty cart message
-        emptyCartMessage.style.display = 'block';
-        cartSummary.style.display = 'none';
-        return;
-    }
-
-    // Hide empty cart message and show summary
-    emptyCartMessage.style.display = 'none';
-    cartSummary.style.display = 'block';
-
-    // Add cart items
-    cart.forEach((item, index) => {
-        const itemElement = createCartItemElement(item, index);
-        cartContainer.innerHTML += itemElement;
-    });
-
-    // Update summary
-    updateSummary();
 }
 
-// Remove item from cart (no quantity logic)
-function removeItem(index) {
-    const cart = loadCart();
-    cart.splice(index, 1);
-    saveCart(cart);
-    updateCartDisplay();
-}
 
 
 // Update summary calculations (no quantity)
@@ -342,8 +348,18 @@ function initializeMockData() {
 }
 
 // Run on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Uncomment this line to add test data when developing locally
-    // initializeMockData();
+document.addEventListener('DOMContentLoaded', function () {
     updateCartDisplay();
 });
+
+// Initialize checkout page
+if (window.location.pathname.includes('checkout.html')) {
+    document.addEventListener('DOMContentLoaded', renderCheckoutCart);
+}
+
+// Initialize order list page
+if (window.location.pathname.includes('orderList.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartDisplay(true); // Show remove buttons
+    });
+}

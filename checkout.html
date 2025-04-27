@@ -18,28 +18,37 @@
         <div class="checkout-container">
             <div class="order-summary">
                 <h2>Order Summary</h2>
-                <div id="cart-items">
+                <div id="cart-items-container">
                     <!-- Cart items will be dynamically inserted here -->
                 </div>
-                <div class="order-item">
-                    <div>Subtotal</div>
-                    <div id="subtotal">$0.00</div>
+                <div id="empty-cart-message" style="display: none;">
+                    <h3>Your cart is empty</h3>
+                    <p>Looks like you haven't added anything to your cart yet.</p>
+                    <a href="index.html" class="btn">Browse Menu</a>
                 </div>
-                <div class="order-item">
-                    <div>Tax</div>
-                    <div id="tax">$0.00</div>
-                </div>
-                <div class="order-item">
-                    <div>Delivery Fee</div>
-                    <div id="delivery-fee">$3.99</div>
-                </div>
-                <div class="total-row">
-                    <div>Total</div>
-                    <div class="total-price" id="total">$0.00</div>
+                <div id="cart-summary" style="display: none;">
+                    <h2>Order Summary</h2>
+                    <div class="summary-row">
+                        <div>Subtotal</div>
+                        <div id="subtotal">$0.00</div>
+                    </div>
+                    <div class="summary-row">
+                        <div>Tax</div>
+                        <div id="tax">$0.00</div>
+                    </div>
+                    <div class="summary-row">
+                        <div>Delivery Fee</div>
+                        <div id="delivery-fee">$3.99</div>
+                    </div>
+                    <div class="total-row">
+                        <div>Total</div>
+                        <div class="total-price" id="total-price"></div>
+                    </div>
                 </div>
                 <button class="btn btn-outline" onclick="editOrder()">Edit Order</button>
                 <button class="btn btn-outline" onclick="clearCart()">Clear Cart</button>
             </div>
+            
             <div class="payment-details">
                 <h2>Delivery Details</h2>
                 <div class="form-group">
