@@ -89,6 +89,7 @@ nav a:hover {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .btn:hover {
@@ -339,20 +340,6 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
